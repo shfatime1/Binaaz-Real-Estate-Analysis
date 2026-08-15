@@ -19,9 +19,9 @@ Not stored in the repo due to file size.
 
 ```
 📦 Binaaz-Real-Estate-Analysis
- ├── 📓 Binaaz_EDA.ipynb          ← Full pipeline: cleaning, EDA, outliers, features, viz
+ ├── 📓 Binaaz_Analysis_.ipynb          ← Full pipeline: cleaning, EDA, outliers, features, viz
  ├── 📊 data/
- │   └── binaaz_cleaned.zip
+ │   └── binaaz_cleaned_data.zip
  └── README.md
 ```
 
