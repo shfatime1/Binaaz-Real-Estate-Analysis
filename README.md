@@ -49,7 +49,9 @@ Each column was handled with a reasoned, column-specific strategy rather than bl
 ### 3. Outlier Detection & Removal
 - IQR was chosen first since the data is heavily right-skewed and median-based methods are less sensitive to extreme values than z-score
 - Flagged outliers were inspected before removal (`nlargest`, threshold checks) to confirm they were genuine high-value listings, not data errors
-- Final removal used **Isolation Forest** (contamination=0.01) across 5 numeric columns jointly, since it captures multivariate anomalies that single-column IQR bounds miss
+- Main removal used **Isolation Forest** (contamination=0.01) across 5 numeric columns jointly, since it captures multivariate anomalies that single-column IQR bounds miss
+- Isolation Forest is density/combination-based, so it doesn't reliably catch single-column, physically impossible **low-end** values (e.g. `price` = 11 AZN) that don't stand out in the joint feature space
+- As a follow-up, a simple rule-based lower-bound filter was applied per column — rows below the **0.05th percentile** (`quantile(0.0005)`) were dropped, targeting unrealistic minimums left after Isolation Forest
 
 ### 4. Feature Engineering
 - `Current_floor` / `Total_floor` — split from the `Mərtəbə` (floor) string
